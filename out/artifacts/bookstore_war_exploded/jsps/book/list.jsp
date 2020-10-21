@@ -33,9 +33,9 @@
   <body>
 <c:forEach items="${bookList}" var="book">
     <div class="icon">
-        <a href="<c:url value='/jsps/book/desc.jsp'/>"><img src="<c:url value='/${book.image}'/>" border="0"/></a>
+        <a href="<c:url value='/bookServlet?method=load&bid=${book.bid}'/>"><img src="<c:url value='/${book.image}'/>" border="0"/></a>
         <br/>
-        <a href="<c:url value='/jsps/book/desc.jsp'/>">${book.bname}</a>
+        <a href="<c:url value='/bookServlet?method=load&bid=${book.bid}'/>">${book.bname}</a>
     </div>
 </c:forEach>
   

@@ -16,4 +16,16 @@ public class BookServlet extends BaseServlet {
         request.setAttribute("bookList", service.findAll());
         return "f:/jsps/book/list.jsp";
     }
+
+    public String findByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        request.setAttribute("bookList", service.findByCategory(cid));
+        return "f:/jsps/book/list.jsp";
+    }
+
+    public String load(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bid = request.getParameter("bid");
+        request.setAttribute("book", service.load(bid));
+        return "f:/jsps/book/desc.jsp";
+    }
 }

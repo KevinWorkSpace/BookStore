@@ -12,4 +12,12 @@ public class BookService {
     public List<Book> findAll() {
         return dao.findAll();
     }
+
+    public List<Book> findByCategory(String cid) {
+        return dao.findByCategory(cid);
+    }
+
+    public Book load(String bid) {
+        return dao.load(bid);
+    }
 }

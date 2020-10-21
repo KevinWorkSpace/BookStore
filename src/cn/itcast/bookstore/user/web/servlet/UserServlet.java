@@ -1,5 +1,6 @@
 package cn.itcast.bookstore.user.web.servlet;
 
+import cn.itcast.bookstore.cart.domain.Cart;
 import cn.itcast.bookstore.user.domain.User;
 import cn.itcast.bookstore.user.service.UserException;
 import cn.itcast.bookstore.user.service.UserService;
@@ -30,6 +31,7 @@ public class UserServlet extends BaseServlet {
         try {
             User user = userService.login(form);
             req.getSession().setAttribute("session_user", user);
+            req.getSession().setAttribute("cart", new Cart());
             return "r:/index.jsp";
         } catch (UserException e) {
             req.setAttribute("msg", e.getMessage());
