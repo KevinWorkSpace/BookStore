@@ -4,6 +4,7 @@ import cn.itcast.bookstore.cart.domain.Cart;
 import cn.itcast.bookstore.cart.domain.CartItem;
 import cn.itcast.bookstore.order.domain.Order;
 import cn.itcast.bookstore.order.domain.OrderItem;
+import cn.itcast.bookstore.order.service.OrderException;
 import cn.itcast.bookstore.order.service.OrderService;
 import cn.itcast.bookstore.user.domain.User;
 import cn.itcast.commons.CommonUtils;
@@ -22,6 +23,17 @@ import java.util.List;
 public class OrderServlet extends BaseServlet {
 
     private OrderService service = new OrderService();
+
+    public String confirm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String oid = request.getParameter("oid");
+        try {
+            service.confirm(oid);
+            request.setAttribute("msg", "恭喜， 确认成功");
+        } catch (OrderException e) {
+            request.setAttribute("msg", e.getMessage());
+        }
+        return "f:/jsps/msg.jsp";
+    }
 
     public String load(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String oid = request.getParameter("oid");

@@ -171,7 +171,7 @@ public class OrderDao {
             //2，通过Connection获取一个操作sql语句的对象Statement
             Statement statement = connection.createStatement();
             //3，拼接sql语句
-            String sql = "select * from orders where oid = '" + oid + "'";
+            String sql = "select * from orders where  = '" + oid + "'";
             //4，查询，返回的结果放入ResultSet对象中。
             ResultSet resultSet = statement.executeQuery(sql);
             //5，将游标后移一位
@@ -195,5 +195,41 @@ public class OrderDao {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public int getStateByOid(String oid) {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select state from orders where oid = '" + oid + "'";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            if (resultSet.next()) {
+                int state = resultSet.getInt(1);
+                return state;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public void updateState(String oid, int state) {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "update orders set state = " + state + " where oid = '" + oid + "'";
+            //4，查询，返回的结果放入ResultSet对象中。
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

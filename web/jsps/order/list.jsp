@@ -66,7 +66,7 @@
 					</c:when>
 					<c:when test="${order.state eq 2}">发货</c:when>
 					<c:when test="${order.state eq 3}">
-						<a href="javascript:alert('已确认收货！');">确认收货</a>
+						<a href="<c:url value='/orderServlet?method=confirm&oid=${order.oid}'/>">确认收货</a>
 					</c:when>
 					<c:when test="${order.state eq 4}">交易成功</c:when>
 				</c:choose>
