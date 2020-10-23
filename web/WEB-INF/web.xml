@@ -24,6 +24,22 @@
         <servlet-name>AdminCategoryServlet</servlet-name>
         <servlet-class>cn.itcast.bookstore.category.web.servlet.admin.AdminCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminBookServlet</servlet-name>
+        <servlet-class>cn.itcast.bookstore.book.web.servlet.admin.AdminBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAddBookServlet</servlet-name>
+        <servlet-class>cn.itcast.bookstore.book.web.servlet.admin.AdminAddBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminAddBookServlet</servlet-name>
+        <url-pattern>/admin/AdminAddBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBookServlet</servlet-name>
+        <url-pattern>/admin/AdminBookServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminCategoryServlet</servlet-name>
         <url-pattern>/admin/AdminCategoryServlet</url-pattern>

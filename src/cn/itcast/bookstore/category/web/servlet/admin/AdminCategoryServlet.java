@@ -46,7 +46,6 @@ public class AdminCategoryServlet extends BaseServlet {
     public String editPre(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("id");
         Category category = service.findById(cid);
-        System.out.println(category.getCid() + " " + category.getCname());
         request.setAttribute("category", category);
         return "f:/adminjsps/admin/category/mod.jsp";
     }
@@ -54,7 +53,6 @@ public class AdminCategoryServlet extends BaseServlet {
     public String edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("cid");
         String cname = request.getParameter("cname");
-        System.out.println(cid + "===" + cname);
         Category category = new Category();
         category.setCid(cid);
         category.setCname(cname);
