@@ -204,7 +204,7 @@ public class OrderDao {
             //2，通过Connection获取一个操作sql语句的对象Statement
             Statement statement = connection.createStatement();
             //3，拼接sql语句
-            String sql = "select state from orders where oid = '" + oid + "'";
+            String sql = "select state from orders wherid = '" + oid + "'";
             //4，查询，返回的结果放入ResultSet对象中。
             ResultSet resultSet = statement.executeQuery(sql);
             //5，将游标后移一位
