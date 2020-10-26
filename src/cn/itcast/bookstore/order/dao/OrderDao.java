@@ -232,4 +232,179 @@ public class OrderDao {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Order> findAll() {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select * from orders";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            List<Order> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String oid = resultSet.getString(1);
+                Timestamp orderTime = resultSet.getTimestamp(2);
+                double total = resultSet.getDouble(3);
+                int state = resultSet.getInt(4);
+                String address = resultSet.getString(6);
+                Order order = new Order();
+                order.setOid(oid);
+                order.setOrdertime(orderTime);
+                order.setTotal(total);
+                order.setState(state);
+                order.setAddress(address);
+                List<Map<String, Object>> mapList = myOrderItem(order);
+                List<OrderItem> orderItemList = toOrderItemList(mapList, order);
+                order.setOrderItemList(orderItemList);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Order> notPayed() {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select * from orders where state=1";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            List<Order> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String oid = resultSet.getString(1);
+                Timestamp orderTime = resultSet.getTimestamp(2);
+                double total = resultSet.getDouble(3);
+                int state = resultSet.getInt(4);
+                String address = resultSet.getString(6);
+                Order order = new Order();
+                order.setOid(oid);
+                order.setOrdertime(orderTime);
+                order.setTotal(total);
+                order.setState(state);
+                order.setAddress(address);
+                List<Map<String, Object>> mapList = myOrderItem(order);
+                List<OrderItem> orderItemList = toOrderItemList(mapList, order);
+                order.setOrderItemList(orderItemList);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Order> hasPayed() {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select * from orders where state=2";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            List<Order> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String oid = resultSet.getString(1);
+                Timestamp orderTime = resultSet.getTimestamp(2);
+                double total = resultSet.getDouble(3);
+                int state = resultSet.getInt(4);
+                String address = resultSet.getString(6);
+                Order order = new Order();
+                order.setOid(oid);
+                order.setOrdertime(orderTime);
+                order.setTotal(total);
+                order.setState(state);
+                order.setAddress(address);
+                List<Map<String, Object>> mapList = myOrderItem(order);
+                List<OrderItem> orderItemList = toOrderItemList(mapList, order);
+                order.setOrderItemList(orderItemList);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Order> notReceived() {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select * from orders where state=3";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            List<Order> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String oid = resultSet.getString(1);
+                Timestamp orderTime = resultSet.getTimestamp(2);
+                double total = resultSet.getDouble(3);
+                int state = resultSet.getInt(4);
+                String address = resultSet.getString(6);
+                Order order = new Order();
+                order.setOid(oid);
+                order.setOrdertime(orderTime);
+                order.setTotal(total);
+                order.setState(state);
+                order.setAddress(address);
+                List<Map<String, Object>> mapList = myOrderItem(order);
+                List<OrderItem> orderItemList = toOrderItemList(mapList, order);
+                order.setOrderItemList(orderItemList);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Order> finished() {
+        try {
+            //1，得到Connection对象，
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "select * from orders where state=4";
+            //4，查询，返回的结果放入ResultSet对象中。
+            ResultSet resultSet = statement.executeQuery(sql);
+            //5，将游标后移一位
+            List<Order> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String oid = resultSet.getString(1);
+                Timestamp orderTime = resultSet.getTimestamp(2);
+                double total = resultSet.getDouble(3);
+                int state = resultSet.getInt(4);
+                String address = resultSet.getString(6);
+                Order order = new Order();
+                order.setOid(oid);
+                order.setOrdertime(orderTime);
+                order.setTotal(total);
+                order.setState(state);
+                order.setAddress(address);
+                List<Map<String, Object>> mapList = myOrderItem(order);
+                List<OrderItem> orderItemList = toOrderItemList(mapList, order);
+                order.setOrderItemList(orderItemList);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

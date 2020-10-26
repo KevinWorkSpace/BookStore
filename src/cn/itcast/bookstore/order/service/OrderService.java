@@ -28,4 +28,24 @@ public class OrderService {
         if (state != 3) throw new OrderException("订单确认失败");
         dao.updateState(oid, 4);
     }
+
+    public List<Order> findAll() {
+        return dao.findAll();
+    }
+
+    public List<Order> notPayed() {
+        return dao.notPayed();
+    }
+
+    public List<Order> hasPayed() {
+        return dao.hasPayed();
+    }
+
+    public List<Order> notReceived() {
+        return dao.notReceived();
+    }
+
+    public List<Order> finished() {
+        return dao.finished();
+    }
 }

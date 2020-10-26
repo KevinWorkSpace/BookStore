@@ -20,4 +20,16 @@ public class BookService {
     public Book load(String bid) {
         return dao.load(bid);
     }
+
+    public void add(Book book) {
+        dao.add(book);
+    }
+
+    public void delete(String bid) {
+        dao.delete(bid);
+    }
+
+    public void edit(Book book) {
+        dao.edit(book);
+    }
 }

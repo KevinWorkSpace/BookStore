@@ -4,6 +4,7 @@ import cn.itcast.bookstore.book.domain.Book;
 import cn.itcast.bookstore.book.service.BookService;
 import cn.itcast.bookstore.category.domain.Category;
 import cn.itcast.bookstore.category.service.CategoryService;
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.servlet.BaseServlet;
 
 import javax.servlet.ServletException;
@@ -32,5 +33,25 @@ public class AdminBookServlet extends BaseServlet {
         request.setAttribute("categoryList", list);
         request.setAttribute("book", book);
         return "f:/adminjsps/admin/book/desc.jsp";
+    }
+
+    public String addPre(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> list = categoryService.findAll();
+        request.setAttribute("categoryList", list);
+        return "f:/adminjsps/admin/book/add.jsp";
+    }
+
+    public String delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bid = request.getParameter("bid");
+        service.delete(bid);
+        return findAll(request, response);
+    }
+
+    public String edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Book book = CommonUtils.toBean(request.getParameterMap(), Book.class);
+        Category category = CommonUtils.toBean(request.getParameterMap(), Category.class);
+        book.setCategory(category);
+        service.edit(book);
+        return findAll(request, response);
     }
 }

@@ -27,7 +27,7 @@ public class BookDao {
             //2，通过Connection获取一个操作sql语句的对象Statement
             Statement statement = connection.createStatement();
             //3，拼接sql语句
-            String sql = "select * from book";
+            String sql = "select * from book where del=false";
             //4，查询，返回的结果放入ResultSet对象中。
             ResultSet resultSet = statement.executeQuery(sql);
             //5，将游标后移一位
@@ -63,7 +63,7 @@ public class BookDao {
             //2，通过Connection获取一个操作sql语句的对象Statement
             Statement statement = connection.createStatement();
             //3，拼接sql语句
-            String sql = "select * from book where cid='" + cid + "'";
+            String sql = "select * from book where cid='" + cid + "'" + " and del = false";
             //4，查询，返回的结果放入ResultSet对象中。
             ResultSet resultSet = statement.executeQuery(sql);
             //5，将游标后移一位
@@ -98,7 +98,7 @@ public class BookDao {
             //2，通过Connection获取一个操作sql语句的对象Statement
             Statement statement = connection.createStatement();
             //3，拼接sql语句
-            String sql = "select * from book where bid=" + bid;
+            String sql = "select * from book where bid=" + "'" + bid + "'";
             //4，查询，返回的结果放入ResultSet对象中。
             ResultSet resultSet = statement.executeQuery(sql);
             //5，将游标后移一位
@@ -123,5 +123,70 @@ public class BookDao {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public void add(Book book) {
+        try {
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "insert into book values(" +
+                    "'" + book.getBid() + "'" + "," +
+                    "'" + book.getBname() + "'" + "," +
+                    book.getPrice() + "," +
+                    "'" + book.getAuthor() + "'" + "," +
+                    "'" + book.getImage() + "'" + "," +
+                    "'" + book.getCategory().getCid() + "'" +
+                    ")";
+            //4，查询，返回的结果放入ResultSet对象中。
+            statement.executeUpdate(sql);
+            //7，释放资源
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(String bid) {
+        try {
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "update book set del=true where bid=" +
+                    "'" + bid + "'";
+            //4，查询，返回的结果放入ResultSet对象中。
+            statement.executeUpdate(sql);
+            //7，释放资源
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void edit(Book book) {
+        try {
+            Connection connection = getConnection();
+            //2，通过Connection获取一个操作sql语句的对象Statement
+            Statement statement = connection.createStatement();
+            //3，拼接sql语句
+            String sql = "update book set bname=" +
+                    "'" + book.getBname() + "'" + "," +
+                    "price=" + book.getPrice() + "," +
+                    "author='" + book.getAuthor() + "'" + "," +
+                    "image='" + book.getImage() + "'" + "," +
+                    "cid='" + book.getCategory().getCid() + "'" +
+                    "where bid='" + book.getBid() + "'";
+            //4，查询，返回的结果放入ResultSet对象中。
+            statement.executeUpdate(sql);
+            //7，释放资源
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

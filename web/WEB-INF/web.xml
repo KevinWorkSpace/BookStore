@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <servlet>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>cn.itcast.bookstore.user.web.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/jsps/cart/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/jsps/order/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>CartServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>OrderServlet</servlet-name>
+    </filter-mapping>
+    <servlet>
     <servlet-name>UserServlet</servlet-name>
     <servlet-class>cn.itcast.bookstore.user.web.servlet.UserServlet</servlet-class>
   </servlet>
@@ -32,6 +52,14 @@
         <servlet-name>AdminAddBookServlet</servlet-name>
         <servlet-class>cn.itcast.bookstore.book.web.servlet.admin.AdminAddBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <servlet-class>cn.itcast.bookstore.order.web.servlet.admin.AdminOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminOrderServlet</servlet-name>
+        <url-pattern>/admin/AdminOrderServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAddBookServlet</servlet-name>
         <url-pattern>/admin/AdminAddBookServlet</url-pattern>

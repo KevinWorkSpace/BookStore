@@ -38,7 +38,10 @@
   <div>
     <img src="<c:url value='/${book.image}'/>" border="0"/>
   </div>
-  <form style="margin:20px;" id="form" action="javascript:alert('操作成功！');" method="post">
+  <form style="margin:20px;" id="form" action="<c:url value='/admin/AdminBookServlet'/>" method="post">
+	  <input type="hidden" name="method" value="" id="method"/>
+	  <input type="hidden" name="bid" value="${book.bid}"/>
+	  <input type="hidden" name="image" value="${book.image}"/>
   	图书名称：<input type="text" name="bname" value="${book.bname}"/><br/>
   	图书单价：<input type="text" name="price" value="${book.price}元"/><br/>
   	图书作者：<input type="text" name="author" value="${book.author}"/><br/>
@@ -47,8 +50,14 @@
 		  <option value="${c.cid}" <c:if test="${c.cid eq book.category.cid}">selected="selected"</c:if>>${c.cname}</option>
 	  </c:forEach>
     	</select><br/>
-  	<input type="submit" name="method" value="del" onclick="return confirm('是否真要删除该图书？');"/>
-  	<input type="submit" name="method" value="mod"/>
+  	<input type="submit" value="删除" onclick="setMethod('delete')"/>
+  	<input type="submit" value="编辑" onclick="setMethod('edit')"/>
   </form>
   </body>
+<script type="application/javascript">
+	function setMethod(method) {
+		var hidden = document.getElementById("method");
+		hidden.value = method;
+	}
+</script>
 </html>
